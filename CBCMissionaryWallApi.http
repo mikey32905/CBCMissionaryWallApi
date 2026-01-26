@@ -1,0 +1,6 @@
+@CBCMissionaryWallApi_HostAddress = http://localhost:5062
+
+GET {{CBCMissionaryWallApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
