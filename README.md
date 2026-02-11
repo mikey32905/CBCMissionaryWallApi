@@ -1,1 +1,1 @@
-CBC Missionary Wall API: A specialized registry service designed to manage and broadcast global missionary data. Engineered with .NET 8, this API provides a centralized 'Source of Truth' for field deployment logs, location data, and mission status updates.
+CBC Missionary Wall API: A specialized registry service designed to manage and broadcast global missionary data. Engineered with .NET 10, this API provides a centralized 'Source of Truth' for field deployment logs, location data, and mission status updates.
