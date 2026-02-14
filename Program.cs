@@ -1,5 +1,7 @@
 using CBCMissionaryWallApi.Data;
+using CBCMissionaryWallApi.Endpoints.CustomIdentity;
 using CBCMissionaryWallApi.Extensions;
+using CBCMissionaryWallApi.Middleware;
 using CBCMissionaryWallApi.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -49,6 +51,8 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseMiddleware<BlockIdentityEndpoints>();
+
 var authRouteGroup = app.MapGroup("/api/auth")
     .WithTags("Admin");
 
@@ -56,6 +60,7 @@ authRouteGroup.MapIdentityApi<ApplicationUser>();
 
 app.MapGet("/", () => "Hello World!")
     .WithName("Welcome Message");
+app.MapCustomIdentityEndpoints();
 
 app.Run();
 

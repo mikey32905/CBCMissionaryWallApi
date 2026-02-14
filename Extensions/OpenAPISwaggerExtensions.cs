@@ -47,25 +47,41 @@ namespace CBCMissionaryWallApi.Extensions
                     Description = "Enter 'Bearer' [space] and then your valid JWT token."
                 });
 
+
                 c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
                 {
-                    [new OpenApiSecuritySchemeReference("bearer", document)] = []
+                    [new OpenApiSecuritySchemeReference("Bearer", document)] = []
                 });
 
-                //c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                //{
-                //    {
-                //        new OpenApiSecurityScheme
-                //        {
-                //             Reference = new OpenApiReference
-                //            {
-                //               Type = ReferenceType.SecurityScheme,
-                //               Id = "Bearer"
-                //            }
-                //        },
-                //        Array.Empty<string>()
-                //    }
-                //});
+
+
+                string[] hiddenEndpoints = [
+                         "api/auth/register",
+                        "api/auth/refresh",
+                        "api/auth/confirmemail",
+                        "api/auth/resendconfirmationemail",
+                        "api/auth/forgotpassword",
+                        "api/auth/resetpassword",
+                        "api/auth/manage",
+                        "api/auth/manage/info",
+                        "api/auth/manage/2fa"
+                     ];
+
+                c.DocInclusionPredicate((docName, apiDesc) =>
+                {
+                    var path = apiDesc.RelativePath?.ToLowerInvariant();
+
+                    if (path is null)
+                        return false;
+
+                    if (hiddenEndpoints.Contains(path, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return false;
+                    }
+
+                    return true;
+
+                });
 
 
             });
